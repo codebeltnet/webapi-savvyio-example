@@ -24,7 +24,7 @@ namespace Savvyio_Example.App.Queries
 
         private async Task<IEnumerable<WeatherForecast>> GetWeatherForecastAsync(GetWeatherForecast q, CancellationToken stoppingToken)
         {
-            var dao = await _dao.ReadAllAsync(null, o =>
+            var dao = await _dao.ReadAllAsync(o =>
             {
                 o.CommandText = "SELECT * FROM WF";
             });

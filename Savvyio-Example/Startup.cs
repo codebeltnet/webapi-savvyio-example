@@ -58,7 +58,7 @@ namespace Savvyio_Example
                     }
                     return cnn;
 
-            }).AddDapperDataAccessObject<WeatherForecast>();
+            }).AddDefaultDapperDataAccessObject<WeatherForecast>();
 
             services.AddSavvyIO(o => o.EnableAutomaticDispatcherDiscovery().EnableAutomaticHandlerDiscovery().EnableHandlerServicesDescriptor().AddMediator<Mediator>());
 

@@ -8,24 +8,9 @@ namespace Savvyio_Example.App.Domain.Events
     {
         protected override void RegisterDelegates(IFireForgetRegistry<IDomainEvent> handlers)
         {
-            handlers.RegisterAsync<LocationForecastInitiated>(OnLocationForecastInitiated);
-            handlers.RegisterAsync<TemperatureChanged>(OnTemperatureChanged);
-            handlers.RegisterAsync<WeatherSymbolChanged>(OnWeatherSymbolChanged);
-        }
-
-        private Task OnWeatherSymbolChanged(WeatherSymbolChanged e)
-        {
-            return Task.CompletedTask;
-        }
-
-        private Task OnTemperatureChanged(TemperatureChanged e)
-        {
-            return Task.CompletedTask;
-        }
-
-        private Task OnLocationForecastInitiated(LocationForecastInitiated e)
-        {
-            return Task.CompletedTask;
+            handlers.RegisterAsync<LocationForecastInitiated>(_ => Task.CompletedTask);
+            handlers.RegisterAsync<TemperatureChanged>(_ => Task.CompletedTask);
+            handlers.RegisterAsync<WeatherSymbolChanged>(_ => Task.CompletedTask);
         }
     }
 }

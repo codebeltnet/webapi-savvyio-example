@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
-    <PackageReference Include="Savvyio.App" Version="0.7.0-rc" />
+    <PackageReference Include="Savvyio.App" Version="0.8.0-preview.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.5" />
