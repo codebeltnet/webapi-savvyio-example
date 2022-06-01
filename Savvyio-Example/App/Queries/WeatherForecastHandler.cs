@@ -10,9 +10,9 @@ namespace Savvyio_Example.App.Queries
 {
     public class WeatherForecastHandler : QueryHandler
     {
-        private readonly IReadableDataAccessObject<WeatherForecast, DapperOptions> _dao;
+        private readonly ISearchableDataStore<WeatherForecast, DapperQueryOptions> _dao;
 
-        public WeatherForecastHandler(IReadableDataAccessObject<WeatherForecast, DapperOptions> dao)
+        public WeatherForecastHandler(ISearchableDataStore<WeatherForecast, DapperQueryOptions> dao)
         {
             _dao = dao;
         }
@@ -24,10 +24,7 @@ namespace Savvyio_Example.App.Queries
 
         private async Task<IEnumerable<WeatherForecast>> GetWeatherForecastAsync(GetWeatherForecast q, CancellationToken stoppingToken)
         {
-            var dao = await _dao.ReadAllAsync(o =>
-            {
-                o.CommandText = "SELECT * FROM WF";
-            });
+            var dao = await _dao.FindAllAsync();
             return dao;
         }
     }

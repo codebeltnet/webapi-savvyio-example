@@ -24,10 +24,10 @@ namespace Savvyio_Example.Controllers
     {
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IMediator _mediator;
-        private readonly IEfCoreDataStore _ds;
+        private readonly IEfCoreDataSource _ds;
         private readonly HandlerServicesDescriptor _descriptor;
 
-        public WeatherForecastController(IMediator mediator, ILogger<WeatherForecastController> logger, IEfCoreDataStore ds, HandlerServicesDescriptor descriptor)
+        public WeatherForecastController(IMediator mediator, ILogger<WeatherForecastController> logger, IEfCoreDataSource ds, HandlerServicesDescriptor descriptor)
         {
             _logger = logger;
             _mediator = mediator;

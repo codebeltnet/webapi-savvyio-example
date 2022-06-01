@@ -9,9 +9,9 @@ namespace Savvyio_Example.App.Events
 {
     public class LocationForecastHandler : IntegrationEventHandler
     {
-        private readonly IPersistentDataAccessObject<WeatherForecast, DapperOptions> _dao;
+        private readonly IPersistentDataStore<WeatherForecast, DapperQueryOptions> _dao;
 
-        public LocationForecastHandler(IPersistentDataAccessObject<WeatherForecast, DapperOptions> dao)
+        public LocationForecastHandler(IPersistentDataStore<WeatherForecast, DapperQueryOptions> dao)
         {
             _dao = dao;
         }
@@ -28,7 +28,7 @@ namespace Savvyio_Example.App.Events
                 Date = ie.Time,
                 Summary = $"{ie.WeatherDescription} {ie.WeatherIcon}",
                 TemperatureC = (int)ie.Temperature
-            }, o => o.CommandText = "INSERT INTO WF (Date, TemperatureC, Summary) VALUES (@Date, @TemperatureC, @Summary)");
+            });
         }
     }
 }

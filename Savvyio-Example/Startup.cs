@@ -9,12 +9,14 @@ using Dapper;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Savvyio.Extensions;
+using Savvyio.Extensions.Dapper;
 using Savvyio.Extensions.DependencyInjection;
 using Savvyio.Extensions.DependencyInjection.Dapper;
 using Savvyio.Extensions.DependencyInjection.EFCore.Domain;
 using Savvyio.Extensions.DependencyInjection.EFCore.Domain.EventSourcing;
 using Savvyio.Extensions.EFCore.Domain.EventSourcing;
 using Savvyio_Example.App;
+using Savvyio_Example.App.Data;
 using Savvyio_Example.App.Domain;
 
 
@@ -40,13 +42,13 @@ namespace Savvyio_Example
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Savvyio_Example", Version = "v1" });
             });
 
-            services.AddEfCoreAggregateDataStore(o =>
+            services.AddEfCoreAggregateDataSource(o =>
             {
                 o.ContextConfigurator = b => b.UseInMemoryDatabase(nameof(LocationForecast)).EnableDetailedErrors().LogTo(Console.WriteLine);
                 o.ModelConstructor = mb => mb.AddEventSourcing<LocationForecast, Guid>();
             }).AddEfCoreTracedAggregateRepository<LocationForecast, Guid>();
 
-            services.AddDapperDataStore(o => o.ConnectionFactory = () =>
+            services.AddDapperDataSource(o => o.ConnectionFactory = () =>
             {
                     var cnn = new SqliteConnection("Data Source=database.db");
                     if (!FirstRun)
@@ -58,7 +60,7 @@ namespace Savvyio_Example
                     }
                     return cnn;
 
-            }).AddDefaultDapperDataAccessObject<WeatherForecast>();
+            }).AddDapperDataStore<WeatherForecastDataStore, WeatherForecast>();
 
             services.AddSavvyIO(o => o.EnableAutomaticDispatcherDiscovery().EnableAutomaticHandlerDiscovery().EnableHandlerServicesDescriptor().AddMediator<Mediator>());
 
